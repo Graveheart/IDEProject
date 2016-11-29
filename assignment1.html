@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html ng-app="cdPeople">
+  <head>
+    <title>Warming up</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style type="text/css">
+      h1.red {color:red;}
+    </style>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    <script src="/blueimp-md5/js/md5.min.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1 class="red">Interactive Data Exploration Warming up</h1>
+      <div id="images">
+        <img src="http://img-9gag-fun.9cache.com/photo/aw5M8eR_460s.jpg"/>
+      </div>
+      <ol>
+        <li>
+          <h2><a href="http://research.google.com/bigpicture/music/">Music Timeline</a></h2>
+          <div class="row">
+            <div class="col-md-6">
+              <h3>Pros:</h3>
+              <ul>
+                <li>User friendly</li>
+                <li>Provides search option</li>
+                <li>Albums for selected area get on top</li>
+                <li>Shows the seven most popular albums</li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <h3>Cons:</h3>
+              <ul>
+                <li>Loading div is shown even after loading is done</li>
+                <li>Music genre is not shown after searching</li>
+                <li>Colors appear to be random</li>
+                <li>Repeating colors for different items makes telling them apart hard</li>
+                <li>Not that much user customization</li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li>
+          <h2>
+            <a href="http://graphics.wsj.com/job-market-tracker/">Track National Unemployment</a>
+          </h2>
+          <div class="row">
+            <div class="col-md-6">
+              <h3>Pros:</h3>
+              <ul>
+                <li>Provides detailed information</li>
+                <li>Provides legend for colors</li>
+                <li>Hovering over a sector shows a dot on that sector for previous/next months</li>
+                <li>Clicking on a month gives you a detailed view table for that month</li>
+                <li>Has a sorting option</li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <h3>Cons:</h3>
+              <ul>
+                <li>No search or filtering makes it a hard to find a particular sector you are looking for</li>
+                <li>Sectors are too general</li>
+              </ul>
+            </div>
+          </div>
+        </li>
+      </ol>
+      <h2>Project: Browser History</h2>
+      <ol>
+        <li>
+          <h3>What type of data would you like to visualize, and where would you get access to this data?</h3>
+          <p>Browser history from Google Chrome history, can be either accessed locally through a Google Chrome extension or through a csv file with real-life data.</p>
+        </li>
+        <li>
+          <h3>What story would the combination of text and visualization tell?</h3>
+          <p>Google Chrome history is far from perfect and finding something you are looking for can be very hard at times. I would provide a solution for a better way of visualizing browser history with some custom features.</p>
+        </li>
+        <li>
+          <h3>Who is the intended audience?</h3>
+          <p>Everyone is browsing excessively nowadays and creating this as a web application means it can be used by abosutely everyone. Another alternative is to restrict it a bit and address only Google Chrome as it is the most widely used browser by creating an extension.</p>
+        </li>
+        <li>
+          <h3>A sketch/mockup of the visualization.</h3>
+          <p>
+            I got the idea from <a href="https://medium.freecodecamp.com/browserhistory-2abad38022b1#.ledfw74po">this article</a>. It is purely conceptual idea with sketches only so it does not have a real implementation. Their proposed solution looks like this:<br>
+            <img width="1000" src="https://d262ilb51hltx0.cloudfront.net/max/1200/1*osSaXFJiSJifjhKXo-6X1w.png"/><br/>
+            Also I like the idea of a view showing all your searches which should look something like this:
+            <img src="https://d262ilb51hltx0.cloudfront.net/max/1000/1*pjWiF_6l3OYfi4tga0k0bQ.gif">
+          </p>
+        </li>
+      </ol>
+    </div>
+    <script type="application/javascript">
+      var img = new Image();
+      var div = document.getElementById('images');
+
+      img.onload = function() {
+        div.appendChild(img);
+      };
+
+      img.src = 'http://img-9gag-fun.9cache.com/photo/aAwGG69_460s.jpg';
+    </script>
+  </body>
+</html>

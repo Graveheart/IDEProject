@@ -1,0 +1,6 @@
+bower_components/
+
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion
+# @see https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore
+
+*.idea
