@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Project2: temperature data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style type="text/css">
+      #main {
+        max-width: 1200px;
+        margin: auto;
+      }
+      path.line { 
+        stroke-width: 2;
+        fill: none;
+      }
+
+      .axis path,
+      .axis line {
+        fill: none;
+        stroke: grey;
+        stroke-width: 1;
+        shape-rendering: crispEdges;
+      }
+    </style>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+  </head>
+
+  <body>
+    <div id="main">
+      <h1 class="text-center">Project 2: temperature data</h1>
+    </div>
+    
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.18.0/d3-legend.min.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", init);
+    function init() {
+      // Set the dimensions of the svg canvas
+      var margin = {top: 30, right: 20, bottom: 30, left: 50},
+          width = 1200 - margin.left - margin.right,
+          height = 470 - margin.top - margin.bottom,
+          dataProperties = [
+            {color: "rgb(56, 106, 197)", key: 'metANN'},
+            {color: "rgb(223, 199, 31)", key: 'M-A-M'},
+            {color: "rgb(93, 199, 76)", key: 'J-J-A'},
+            {color: "rgb(234, 118, 47)", key: 'S-O-N'},
+            {color: "rgb(154, 153, 151)", key: 'D-J-F'}
+          ];
+      var colors = dataProperties.map(function(d) {return d.color});
+      var keys = dataProperties.map(function(d) {return d.key});
+
+      // Set the ranges
+      var x = d3.scaleLinear().range([0, width]);
+      var y = d3.scaleLinear().range([height, 0]);
+
+      // Define the line
+      var valuelines = [];
+      dataProperties.forEach(function(el) {
+        var key = el.key;
+        var valueline = d3.line()
+          .x(function(d) { return x(d.YEAR); })
+          .y(function(d) { return y(d[key]); });
+        valuelines.push(valueline);
+      });
+
+      // Adds the svg canvas
+      var svg = d3.select("#main")
+        .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+            .attr("transform", 
+                  "translate(" + margin.left + "," + margin.top + ")");
+
+      // Get the data
+      d3.csv("data/data.csv", function(error, data) {
+        if (error) throw error;
+
+        // Coerce the data to numbers and find the minimum and maximum.
+        var minimum = 0;
+        var maximum = 0;
+        data.forEach(function(row, ind) {
+          for(var key in row) {
+            row[key] = +row[key];
+            if (keys.includes(key)) {
+              // remove inaccurate data
+              if (row[key] > 99) {
+                data.splice(ind, 1);
+              }
+              else {
+                if (row[key] > maximum){
+                  maximum = row[key];
+                }
+                if (row[key] < minimum){
+                  minimum = row[key];
+                }
+              }
+            }
+          }
+        });
+        // Scale the range of the data
+        x.domain(d3.extent(data, function(d) {return d.YEAR; }));
+        y.domain([minimum, maximum]);
+
+        // Add the valuelines path.
+        valuelines.forEach(function(valueline, ind) {
+          svg.append("path")
+            .attr("class", "line")
+            .attr("stroke", colors[ind])
+            .attr("d", valueline(data));
+        });
+
+        // Add the X Axis
+        svg.append("g")
+            .attr("class", "axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x))
+            .append("text")
+              .attr("fill", "#000")
+              .attr("x", 35)
+              .attr("y", 10)
+              .attr("dy", "0.71em")
+              .style("text-anchor", "end")
+              .style("font-size", "16px")
+              .text('Year');
+
+        // Add the Y Axis
+        svg.append("g")
+            .attr("class", "axis")
+            .call(d3.axisLeft(y))
+            .append("text")
+                  .attr("fill", "#000")
+                  .attr("x", -15)
+                  .attr("dy", "0.71em")
+                  .style("text-anchor", "end")
+                  .style("font-size", "16px")
+                  .html('&deg;C');
+      });
+
+      svg.append("text")
+          .attr("x", (width / 2))             
+          .attr("y", 0 - (margin.top / 2))
+          .attr("text-anchor", "middle")  
+          .style("font-size", "20px") 
+          .style("text-decoration", "bold")  
+          .text("Yearly average temperature in Sofia, Bulgaria");
+
+      var ordinal = d3.scaleOrdinal()
+        .domain(["yearly temperature", "spring", "summer", "autumn", "winter"])
+        .range(colors);
+
+      svg.append("g")
+        .attr("class", "legendOrdinal")
+        .attr("transform", "translate(50,20)");
+
+      var legendOrdinal = d3.legendColor()
+        .shape("path", d3.symbol().type(d3.symbolTriangle).size(150)())
+        .shapePadding(10)
+        .scale(ordinal);
+
+      svg.select(".legendOrdinal")
+        .call(legendOrdinal);
+    }
+    </script>
+  </body>
+</html>
