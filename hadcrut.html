@@ -124,13 +124,14 @@ function start_vis() {
     var margin = { top: 15, right: 0, bottom: 30, left: 50 };
     var width = 770 - margin.left - margin.right;
     var height = 550 - margin.top - margin.bottom;
-
+    var padding_x = 1;
+    // 
     var scale_x_date = d3.scaleLinear()
-                         .domain([1950, 2020])
+                         .domain([1951 - padding_x, 2016 + padding_x])
                          .range([0, width]);
     // use the minumum and maximum values from previous visualization
     var scale_y_continuous = d3.scaleLinear()
-                               .domain([-10, 30])
+                               .domain([-8, 28])
                                .range([height, 0]);
 
     var x_axis = d3.axisTop(scale_x_date)
