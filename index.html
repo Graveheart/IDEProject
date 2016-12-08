@@ -36,24 +36,20 @@
 
 <ol>
 <li>
-<a href="https://graveheart.github.io/IDEProject/linegraph.html">https://graveheart.github.io/IDEProject/linegraph.html</a><br>
+<a href="https://graveheart.github.io/IDEProject/linegraph.html">Line graph</a><br>
 </li>
-<li>
-<a href="https://graveheart.github.io/IDEProject/hadcrut.html">https://graveheart.github.io/IDEProject/hadcrut.html</a><br>
-</li>
+<li><a href="https://graveheart.github.io/IDEProject/hadcrut.html">HadCRUT4 Visualization</a></li>
 </ol>
 
 <h3>
 <a id="motivation-method-results-and-conclusions" class="anchor" href="#motivation-method-results-and-conclusions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Motivation, method, results and conclusions</h3>
 
 <ol>
-<li>
-<em>Motivation</em>
-1.1. I have decided to use a line chart as it is a good visualization for showing trends and here we have trend for temperature change</li>
-<li>
-<em>Method</em>
-2.1.  The dataset I am using is for the temperatures measured in Sofia, Bulgaria and is for the years from 1951 to 2016 including. As the origin file was in <em>txt</em> format I had to convert it to another one that is easier to parse. Therefore I replaced the spaces with a comma in order to convert it into a csv file. It can be found in <em>data/data.csv</em>.<br>
-The data has one row for each year which contains monthly, season and yearly temperature averages. The problem with the data is that it contains some lines with values of 999 which I am removing in order not to affect the end result of both charts.</li>
+<li><p><em>Motivation</em><br>
+1.1. I have decided to use a line chart as it is best used to track changes over time using equal intervals of time between each data point. In our case we want to show the temperature changes on an early basis. Since early average temperature is sometimes not enough to get a good comparison between different years I have also decided to use seasonal average temperature as an additional categorical channel. I have chosen to use colors that are easily associated with each season, e.g. grey for winter and yellow for spring. The x and y scales represent the quantitive channels - temperature and year.</p></li>
+<li><p><em>Method</em><br>
+2.1. Dataset - The dataset I am using is for the temperatures measured in Sofia, Bulgaria and is for the years from 1951 to 2016 including. As the origin file was in <em>txt</em> format I had to convert it to another one that is easier to parse. Therefore I replaced the spaces with a comma in order to convert it into a csv file. It can be found in <em>data/data.csv</em>.<br>
+The data has one row for each year which contains monthly, season and yearly temperature averages. The problem with the data is that it contains some lines with values of 999 which I am removing in order not to affect the end result of both charts.</p></li>
 <li>
 </ol>
 
