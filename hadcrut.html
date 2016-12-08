@@ -86,6 +86,8 @@ function toggle(what) {
 
 function start_vis() {
   var as_date = d3.timeParse("%Y-%m-%d");
+  var max_average = 0;
+  var min_average = 99;
 
   fmt_C = function(d) { return(d + "°C"); }
 
@@ -108,6 +110,12 @@ function start_vis() {
           }
         }
       }
+    }
+    if ((d.metANN < 99) && (d.metANN > max_average)) {
+      max_average = d.metANN;
+    }
+    if (d.metANN < min_average) {
+      min_average = d.metANN;
     }
     return {
       median: d.metANN,
@@ -137,11 +145,10 @@ function start_vis() {
     var x_axis = d3.axisTop(scale_x_date)
                    .tickSize(-height);
     var y_axis = d3.axisLeft(scale_y_continuous)
-  //                 .tickValues([0, 1.5, 2])
                    .tickSize(-width)
                    .tickFormat(fmt_C);
-
-    var scale_color_temp = d3.scaleViridis().domain([-0.962, 1.010]);
+    // use minimumn and maximum average as color domain
+    var scale_color_temp = d3.scaleViridis().domain([min_average, max_average]);
     var scale_color_year = d3.scalePlasma().domain([1951, 2016]);
 
     var chart = d3.select("#chart")
