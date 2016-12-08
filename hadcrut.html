@@ -148,7 +148,7 @@ function start_vis() {
                    .tickSize(-width)
                    .tickFormat(fmt_C);
     // use minimumn and maximum average as color domain
-    var scale_color_temp = d3.scaleViridis().domain([min_average, max_average]);
+    var scale_color_temp = d3.scaleCool().domain([min_average, max_average]);
     var scale_color_year = d3.scalePlasma().domain([1951, 2016]);
 
     var chart = d3.select("#chart")
@@ -178,7 +178,7 @@ function start_vis() {
          .attr("x2", function(d) { return(scale_x_date(d.year)); })
          .attr("y1", function(d) { return(scale_y_continuous(0)); })
          .attr("y2", function(d) { return(scale_y_continuous(0)); })
-         .attr("stroke-width", 0.6)
+         .attr("stroke-width", 1.5)
          .attr("stroke", function(d) {
            if (curr_scale == "year") {
              return(scale_color_year(d.year));
@@ -196,7 +196,7 @@ function start_vis() {
          .attr("x2", function(d) { return(scale_x_date(d.year)); })
          .attr("y1", function(d) { return(scale_y_continuous(d.lower)); })
          .attr("y2", function(d) { return(scale_y_continuous(d.upper)); })
-         .attr("stroke-width", 0.6)
+         .attr("stroke-width", 1.5)
          .attr("stroke", function(d) {
            if (curr_scale == "year") {
              return(scale_color_year(d.year));
